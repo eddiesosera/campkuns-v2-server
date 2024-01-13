@@ -1,5 +1,8 @@
 const allRoles = {
-  user: [],
+  artist: [],
+  gallery: [],
+  organizer: [],
+  tourist: [],
   admin: ['getUsers', 'manageUsers'],
 };
 

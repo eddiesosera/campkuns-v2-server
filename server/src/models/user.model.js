@@ -3,10 +3,17 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
+// const { artistProperties } = require('./users/artist.model');
+
 
 const userSchema = mongoose.Schema(
   {
     name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    username: {
       type: String,
       required: true,
       trim: true,
@@ -27,7 +34,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: 8,
+      minlength: 6,
       validate(value) {
         if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
           throw new Error('Password must contain at least one letter and one number');
@@ -38,7 +45,7 @@ const userSchema = mongoose.Schema(
     role: {
       type: String,
       enum: roles,
-      default: 'user',
+      default: 'tourist',
     },
     isEmailVerified: {
       type: Boolean,
@@ -47,7 +54,7 @@ const userSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // add plugin that converts mongoose to json
