@@ -48,8 +48,8 @@ const getUserById = async (model, id) => {
  * @param {string} email
  * @returns {Promise<User>}
  */
-const getUserByEmail = async (model, email) => {
-  return model.findOne({ email });
+const getUserByEmail = async (User, email) => {
+  return User.findOne({ email });
 };
 
 /**
