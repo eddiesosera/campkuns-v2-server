@@ -48,7 +48,7 @@ const getUserById = async (model, id) => {
  * @param {string} email
  * @returns {Promise<User>}
  */
-const getUserByEmail = async (User, email) => {
+const getUserByEmail = async (email) => {
   return User.findOne({ email });
 };
 

@@ -22,7 +22,7 @@ const getArtistById = async (id) => {
 };
 
 const getArtistByEmail = async (email) => {
-    return userService.getUserByEmail(Artist, email);
+    return userService.getUserByEmail(email);
 }
 
 const updateArtistById = async (artistId, updateBody) => {

@@ -4,16 +4,14 @@ const User = require('../user.model'); // Import the base user model
 
 const artistSchema = mongoose.Schema(
     {
-        // Add artist-specific fields here
         bio: {
             type: String,
             trim: true,
         },
-        // Other artist-specific fields
     },
     {
         timestamps: true,
-        discriminatorKey: 'artist', // Add this line for discriminator key
+        discriminatorKey: 'artist',
     },
 );
 

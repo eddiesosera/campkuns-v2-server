@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const { password, objectId } = require('./custom.validation');
+const artistValidation = require('./users/artist.validation');
 
 const createUser = {
   body: Joi.object().keys({
@@ -8,6 +9,7 @@ const createUser = {
     name: Joi.string().required(),
     username: Joi.string().required(),
     role: Joi.string().required().valid('artist', 'gallery', 'organizer', 'tourist', 'admin'),
+    ...artistValidation,
   }),
 };
 
