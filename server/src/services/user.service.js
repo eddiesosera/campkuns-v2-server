@@ -40,6 +40,7 @@ const queryUsers = async (model, filter, options) => {
  * @returns {Promise<User>}
  */
 const getUserById = async (model, id) => {
+  console.log('User Service working fine. User: ' + model.findById(id)?.id)
   return model.findById(id);
 };
 
@@ -58,12 +59,12 @@ const getUserByEmail = async (email) => {
  * @param {Object} updateBody
  * @returns {Promise<User>}
  */
-const updateUserById = async (userId, updateBody, userType) => {
-  const user = await getUserById(userId);
+const updateUserById = async (model, getUserFunction, userId, updateBody, userType) => {
+  const user = await getUserFunction(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, `${userType} not found`);
   }
-  if (updateBody.email && (await User.isEmailTaken(updateBody.email, userId))) {
+  if (updateBody.email && (await model.isEmailTaken(updateBody.email, userId))) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
   Object.assign(user, updateBody);
@@ -76,12 +77,14 @@ const updateUserById = async (userId, updateBody, userType) => {
  * @param {ObjectId} userId
  * @returns {Promise<User>}
  */
-const deleteUserById = async (userId, userType) => {
-  const user = await getUserById(userId);
+const deleteUserById = async (getUserFunction, userId, userType) => {
+  const user = await getUserFunction(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, `${userType} not found`);
   }
-  await user.remove();
+
+  user.remove();
+
   return user;
 };
 

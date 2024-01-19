@@ -26,18 +26,22 @@ const getUsers = {
 const getUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
-  }),
+    artistId: Joi.string().custom(objectId),
+  }).or('userId', 'artistId').required(),
 };
 
 const updateUser = {
   params: Joi.object().keys({
-    userId: Joi.required().custom(objectId),
-  }),
+    userId: Joi.string().custom(objectId),
+    artistId: Joi.string().custom(objectId),
+  }).or('userId', 'artistId').required(),
   body: Joi.object()
     .keys({
       email: Joi.string().email(),
       password: Joi.string().custom(password),
       name: Joi.string(),
+      role: Joi.string().valid('artist', 'gallery', 'organizer', 'tourist', 'admin'),
+      ...artistValidation,
     })
     .min(1),
 };
@@ -45,7 +49,8 @@ const updateUser = {
 const deleteUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
-  }),
+    artistId: Joi.string().custom(objectId),
+  }).or('userId', 'artistId').required(),
 };
 
 module.exports = {

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
 const User = require('../user.model'); // Import the base user model
-const { types } = require('joi');
 
 const adminSchema = mongoose.Schema(
     {
