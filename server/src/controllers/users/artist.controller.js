@@ -13,7 +13,7 @@ const getArtists = catchAsync(async (req, res) => {
 });
 
 const getArtist = catchAsync(async (req, res, next) => {
-    await userController.getUser(req, res, artistService.getArtistById, 'artistId');
+    await userController.getUser(req, res, artistService.getArtistById, 'artistId', 'Artist');
 });
 
 const updateArtist = catchAsync(async (req, res) => {

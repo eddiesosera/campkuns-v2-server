@@ -39,8 +39,11 @@ const queryUsers = async (model, filter, options) => {
  * @param {ObjectId} id
  * @returns {Promise<User>}
  */
-const getUserById = async (model, id) => {
-  console.log('User Service working fine. User: ' + model.findById(id)?.id)
+const getUserById = async (model, id, userType) => {
+  if (!model.findById(id)) {
+    throw new ApiError(httpStatus.NOT_FOUND, `${userType} not found`);
+  }
+
   return model.findById(id);
 };
 

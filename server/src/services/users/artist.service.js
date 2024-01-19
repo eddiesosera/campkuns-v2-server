@@ -11,8 +11,8 @@ const queryArtists = async (filter, options) => {
     return userService.queryUsers(Artist, filter, options);
 };
 
-const getArtistById = async (id) => {
-    return userService.getUserById(Artist, id);
+const getArtistById = async (artistId) => {
+    return userService.getUserById(Artist, artistId, userType);
 };
 
 const getArtistByEmail = async (email) => {

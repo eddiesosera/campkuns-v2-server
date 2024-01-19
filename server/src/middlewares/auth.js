@@ -36,7 +36,7 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
 
     // Check if the action is related to updating or deleting user accounts
     const isUpdatingUser = req.method === 'PATCH' && req.baseUrl.includes('/users/artists');
-    const isDeletingUser = req.method === 'DELETE' && req.baseUrl.includes('/usersartists');
+    const isDeletingUser = req.method === 'DELETE' && req.baseUrl.includes('/users/artists');
 
     // Allow the update or delete action only if it's the user's own account or if the user is an admin
     if ((isUpdatingUser || isDeletingUser) && userTypes !== user.id) {
