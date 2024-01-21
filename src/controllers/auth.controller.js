@@ -29,8 +29,24 @@ const register = catchAsync(async (req, res) => {
 });
 
 const login = catchAsync(async (req, res) => {
-  const { email, password } = req.body;
-  const user = await authService.loginUserWithEmailAndPassword(email, password);
+  const { email, username, password } = req.body;
+
+  if ((!email && !username) || !password) {
+    return res.status(400).json({ message: 'Email or username and password are required' });
+  }
+
+  let user;
+
+  if (email) {
+    user = await authService.loginUserWithEmailAndPassword(email, password);
+  } else if (username) {
+    user = await authService.loginUserWithUsernameAndPassword(username, password);
+  }
+
+  if (!user) {
+    return res.status(401).json({ message: 'Invalid email/username or password' });
+  }
+
   const tokens = await tokenService.generateAuthTokens(user);
   res.send({ user, tokens });
 });

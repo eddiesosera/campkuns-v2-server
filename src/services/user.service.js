@@ -17,6 +17,10 @@ const createUser = async (model, userBody) => {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
 
+  if (await model.isUsernameTaken(userBody.username)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Username already taken');
+  }
+
   return model.create(userBody);
 };
 
@@ -57,6 +61,15 @@ const getUserByEmail = async (email) => {
 };
 
 /**
+ * Get user by username
+ * @param {string} username
+ * @returns {Promise<User>}
+ */
+const getUserByUsername = async (username) => {
+  return User.findOne({ username });
+};
+
+/**
  * Update user by id
  * @param {ObjectId} userId
  * @param {Object} updateBody
@@ -69,6 +82,9 @@ const updateUserById = async (model, getUserFunction, userId, updateBody, userTy
   }
   if (updateBody.email && (await model.isEmailTaken(updateBody.email, userId))) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  }
+  if (updateBody.username && (await model.isUsernameTaken(updateBody.username, userId))) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Username already taken');
   }
   Object.assign(user, updateBody);
   await user.save();
@@ -96,6 +112,7 @@ module.exports = {
   queryUsers,
   getUserById,
   getUserByEmail,
+  getUserByUsername,
   updateUserById,
   deleteUserById,
 };

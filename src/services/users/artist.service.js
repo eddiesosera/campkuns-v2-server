@@ -19,6 +19,10 @@ const getArtistByEmail = async (email) => {
     return userService.getUserByEmail(email);
 }
 
+const getArtistByUsername = async (username) => {
+    return userService.getUserByUsername(username);
+}
+
 // model,getUserFunction,userId, updateBody, userType
 const updateArtistById = async (artistId, updateBody) => {
     return userService.updateUserById(Artist, getArtistById, artistId, updateBody, userType)
@@ -33,6 +37,7 @@ module.exports = {
     queryArtists,
     getArtistById,
     getArtistByEmail,
+    getArtistByUsername,
     updateArtistById,
     deleteArtistById,
 };

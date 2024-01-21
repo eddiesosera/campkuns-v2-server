@@ -15,9 +15,10 @@ const register = {
 
 const login = {
   body: Joi.object().keys({
-    email: Joi.string().required(),
+    email: Joi.string(),
+    username: Joi.string(),
     password: Joi.string().required(),
-  }),
+  }).or('email', 'username').required(),
 };
 
 const logout = {
