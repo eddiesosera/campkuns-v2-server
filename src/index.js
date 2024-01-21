@@ -3,6 +3,8 @@ const app = require('./app');
 const config = require('./config/config');
 const logger = require('./config/logger');
 
+const functions = require("firebase-functions")
+
 let server;
 mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
   logger.info('Connected to MongoDB');
@@ -36,3 +38,5 @@ process.on('SIGTERM', () => {
     server.close();
   }
 });
+
+exports.api = functions.https.onRequest(server)
