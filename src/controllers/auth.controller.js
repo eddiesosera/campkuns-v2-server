@@ -44,7 +44,7 @@ const login = catchAsync(async (req, res) => {
   }
 
   if (!user) {
-    return res.status(401).json({ message: 'Invalid email/username or password' });
+    return res.status(401).json({ message: 'Invalid user or password' });
   }
 
   const tokens = await tokenService.generateAuthTokens(user);
