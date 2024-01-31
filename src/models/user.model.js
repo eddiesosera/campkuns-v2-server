@@ -5,10 +5,9 @@ const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
 // const { artistProperties } = require('./users/artist.model');
 
-
 const userSchema = mongoose.Schema(
   {
-    name: {
+    publicName: {
       type: String,
       required: true,
       trim: true,
@@ -45,12 +44,42 @@ const userSchema = mongoose.Schema(
     role: {
       type: String,
       enum: roles,
-      default: 'tourist',
+      default: 'explorer',
+    },
+    isAccountVerified: {
+      type: Boolean,
+      default: false,
     },
     isEmailVerified: {
       type: Boolean,
       default: false,
     },
+    banner: {
+      type: Buffer,
+      contentType: String
+    },
+    yearsActive: {
+      type: Number,
+    },
+    dateJoined: {
+      type: Date,
+      default: Date.now
+    },
+    following: {
+      type: String,
+    },
+    following: {
+      type: String,
+    },
+    contactDetails: {
+      type: String,
+    },
+    categories: {
+      type: String,
+    },
+    genres: {
+      type: String,
+    }
   },
   {
     timestamps: true,
