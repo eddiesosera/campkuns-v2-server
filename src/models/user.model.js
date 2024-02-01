@@ -78,6 +78,11 @@ const userSchema = mongoose.Schema(
     },
     genres: {
       type: String,
+    },
+    accountCreatedBy: {
+      type: String,
+      default: 'self',
+      enum: ['admin', 'self']
     }
   },
   {

@@ -1,6 +1,8 @@
 const Joi = require('joi');
 const { password, objectId } = require('./custom.validation');
 const artistValidation = require('./users/artist.validation');
+const galleryValidation = require('./users/gallery.validation');
+const adminValidation = require('./users/admin.validation');
 
 const createUser = {
   body: Joi.object().keys({
@@ -9,7 +11,9 @@ const createUser = {
     name: Joi.string().required(),
     username: Joi.string().required(),
     role: Joi.string().required().valid('artist', 'gallery', 'organizer', 'explorer', 'admin'),
+    ...galleryValidation,
     ...artistValidation,
+    ...adminValidation
   }),
 };
 
@@ -27,7 +31,7 @@ const getUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
     artistId: Joi.string().custom(objectId),
-  }).or('userId', 'artistId', 'adminId').required(),
+  }).or('userId', 'artistId', 'adminId', 'galleryId').required(),
 };
 
 const updateUser = {
@@ -35,7 +39,7 @@ const updateUser = {
     userId: Joi.string().custom(objectId),
     adminId: Joi.string().custom(objectId),
     artistId: Joi.string().custom(objectId),
-  }).or('userId', 'adminId', 'artistId').required(),
+  }).or('userId', 'adminId', 'artistId', 'galleryId').required(),
   body: Joi.object()
     .keys({
       email: Joi.string().email(),
@@ -51,7 +55,7 @@ const deleteUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
     artistId: Joi.string().custom(objectId),
-  }).or('userId', 'artistId').required(),
+  }).or('userId', 'galleryId', 'artistId', 'adminId').required(),
 };
 
 module.exports = {

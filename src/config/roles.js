@@ -1,6 +1,6 @@
 const allRoles = {
   artist: ['artists', 'getArtists', 'manageArtists'],
-  gallery: [],
+  gallery: ['galleries', 'getGalleries', 'manageGalleries'],
   organizer: [],
   tourist: [],
   admin: [
@@ -10,6 +10,9 @@ const allRoles = {
     'artists',
     'getArtists',
     'manageArtists',
+    'galleries',
+    'getGalleries',
+    'manageGalleries',
     'getUsers',
     'manageUsers',
   ],

@@ -9,16 +9,32 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
   }
 
   req.user = user;
+  let requestPath;
+
+  requestPath === "gallery" ? requestPath = "galleries" : requestPath = user.role;
+
+  // switch (requestPath) {
+  //   case 'artist':
+  //     requestRole = 'artist';
+  //     break;
+  //   case 'admin':
+  //     requestRole = 'admin';
+  //     break;
+  //   case 'gallery':
+  //     requestRole = 'galleries';
+  //     break;
+  // }
 
   if (requiredRights.length) {
     const userRights = roleRights.get(user.role);
-    const userTypes = req.params.userId || req.params.artistId || req.params.adminId
+    const userTypes = req.params[user.role]
 
     const hasRequiredRights = requiredRights.every((requiredRight) => userRights.includes(requiredRight));
 
     // Check if the action is related to updating or deleting user accounts
-    const isUpdatingUser = req.method === 'PATCH' && req.baseUrl.includes('/users/artists');
-    const isDeletingUser = req.method === 'DELETE' && req.baseUrl.includes('/users/artists');
+    const isUpdatingUser =
+      req.method === 'PATCH' && req.baseUrl.includes(`/users/${requestPath}`);
+    const isDeletingUser = req.method === 'DELETE' && req.baseUrl.includes(`/users/${requestPath}`);
 
     // Allow the update or delete action only if it's the user's own account or if the user is an admin
     if (user.role !== "admin") {
