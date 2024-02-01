@@ -8,7 +8,7 @@ const createUser = {
     password: Joi.string().required().custom(password),
     name: Joi.string().required(),
     username: Joi.string().required(),
-    role: Joi.string().required().valid('artist', 'gallery', 'organizer', 'tourist', 'admin'),
+    role: Joi.string().required().valid('artist', 'gallery', 'organizer', 'explorer', 'admin'),
     ...artistValidation,
   }),
 };
@@ -27,20 +27,21 @@ const getUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
     artistId: Joi.string().custom(objectId),
-  }).or('userId', 'artistId').required(),
+  }).or('userId', 'artistId', 'adminId').required(),
 };
 
 const updateUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
+    adminId: Joi.string().custom(objectId),
     artistId: Joi.string().custom(objectId),
-  }).or('userId', 'artistId').required(),
+  }).or('userId', 'adminId', 'artistId').required(),
   body: Joi.object()
     .keys({
       email: Joi.string().email(),
       password: Joi.string().custom(password),
       name: Joi.string(),
-      role: Joi.string().valid('artist', 'gallery', 'organizer', 'tourist', 'admin'),
+      role: Joi.string().valid('artist', 'gallery', 'organizer', 'explorer', 'admin'),
       ...artistValidation,
     })
     .min(1),

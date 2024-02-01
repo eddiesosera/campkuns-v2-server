@@ -3,7 +3,16 @@ const allRoles = {
   gallery: [],
   organizer: [],
   tourist: [],
-  admin: ['getUsers', 'manageUsers', 'getArtists', 'manageUsers'],
+  admin: [
+    'admins',
+    'getAdmins',
+    'manageAdmins',
+    'artists',
+    'getArtists',
+    'manageArtists',
+    'getUsers',
+    'manageUsers',
+  ],
 };
 
 const roles = Object.keys(allRoles);

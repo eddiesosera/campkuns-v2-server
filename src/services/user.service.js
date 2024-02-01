@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { User, Artist } = require('../models');
+const { User } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**

@@ -1,7 +1,5 @@
-const httpStatus = require('http-status');
-const userController = require('../user.controller'); // Import the base controller
-const artistService = require('../../services/users/artist.service'); // Import the artist service
-const ApiError = require('../../utils/ApiError');
+const userController = require('../user.controller'); // Base User controller
+const artistService = require('../../services/users/artist.service');
 const catchAsync = require('../../utils/catchAsync');
 
 const createArtist = catchAsync(async (req, res) => {

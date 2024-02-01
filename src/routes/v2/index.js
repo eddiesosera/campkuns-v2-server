@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoute = require('./auth.route');
 const artistRoute = require('./users/artist.route');
+const adminRoute = require('./users/admin.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 
@@ -14,6 +15,10 @@ const defaultRoutes = [
   {
     path: '/users/artists',
     route: artistRoute,
+  },
+  {
+    path: '/users/admins',
+    route: adminRoute,
   },
 ];
 

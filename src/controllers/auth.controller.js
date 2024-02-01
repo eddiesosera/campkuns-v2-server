@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
-const { authService, tokenService, emailService, artistService } = require('../services');
+const ApiError = require('./../utils/ApiError');
+const { authService, tokenService, emailService, artistService, adminService } = require('../services');
 
 const register = catchAsync(async (req, res) => {
   const role = req.body.role;
@@ -8,6 +9,9 @@ const register = catchAsync(async (req, res) => {
 
   // Determine the service based on the user's role
   switch (role) {
+    case 'admin':
+      userService = adminService;
+      break;
     case 'artist':
       userService = artistService;
       break;

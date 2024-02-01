@@ -3,11 +3,10 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
-// const { artistProperties } = require('./users/artist.model');
 
 const userSchema = mongoose.Schema(
   {
-    publicName: {
+    name: {
       type: String,
       required: true,
       trim: true,
