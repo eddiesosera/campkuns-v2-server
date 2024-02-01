@@ -3,6 +3,7 @@ const authRoute = require('./auth.route');
 const artistRoute = require('./users/artist.route');
 const adminRoute = require('./users/admin.route');
 const galleryRoute = require('./users/gallery.route');
+const explorerRoute = require('./users/explorer.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 
@@ -23,6 +24,10 @@ const defaultRoutes = [
   },
   {
     path: '/users/galleries',
+    route: galleryRoute,
+  },
+  {
+    path: '/users/explorers',
     route: galleryRoute,
   },
 ];

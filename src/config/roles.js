@@ -2,17 +2,21 @@ const allRoles = {
   artist: ['artists', 'getArtists', 'manageArtists'],
   gallery: ['galleries', 'getGalleries', 'manageGalleries'],
   organizer: [],
-  tourist: [],
+  explorer: ['explorer', 'getExplorers', 'manageExplorers'],
   admin: [
+    // Admins
     'admins',
     'getAdmins',
     'manageAdmins',
+    // Artists:
     'artists',
     'getArtists',
     'manageArtists',
+    // Galleries
     'galleries',
     'getGalleries',
     'manageGalleries',
+    // Base User
     'getUsers',
     'manageUsers',
   ],

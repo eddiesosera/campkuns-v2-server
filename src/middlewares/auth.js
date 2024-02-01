@@ -13,18 +13,6 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
 
   requestPath === "gallery" ? requestPath = "galleries" : requestPath = user.role;
 
-  // switch (requestPath) {
-  //   case 'artist':
-  //     requestRole = 'artist';
-  //     break;
-  //   case 'admin':
-  //     requestRole = 'admin';
-  //     break;
-  //   case 'gallery':
-  //     requestRole = 'galleries';
-  //     break;
-  // }
-
   if (requiredRights.length) {
     const userRights = roleRights.get(user.role);
     const userTypes = req.params[user.role]
