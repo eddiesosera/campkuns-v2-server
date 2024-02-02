@@ -13,7 +13,7 @@ router
 
 router
     .route('/:explorerId')
-    .get(auth('getExplorer'), validate(userValidation.getUser), explorerController.getExplorer)
+    .get(auth('getExplorers'), validate(userValidation.getUser), explorerController.getExplorer)
     .patch(auth('manageExplorers'), validate(userValidation.updateUser), explorerController.updateExplorer)
     .delete(auth('manageExplorers'), validate(userValidation.deleteUser), explorerController.deleteExplorer);
 

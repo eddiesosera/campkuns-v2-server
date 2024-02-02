@@ -31,6 +31,8 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
       }
     }
 
+    console.log("Params" + JSON.stringify(req.params))
+
     // General check for other rights
     if (!hasRequiredRights) {
       return reject(new ApiError(httpStatus.FORBIDDEN, `Forbidden Access Id: ${userTypes}. Rights for access: [${userRights}] and, Rights possesed: [${requiredRights}]`));

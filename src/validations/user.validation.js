@@ -31,7 +31,10 @@ const getUsers = {
 const getUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
+    adminId: Joi.string().custom(objectId),
     artistId: Joi.string().custom(objectId),
+    galleryId: Joi.string().custom(objectId),
+    explorerId: Joi.string().custom(objectId),
   }).or('userId', 'artistId', 'adminId', 'galleryId', 'explorerId').required(),
 };
 
@@ -40,6 +43,8 @@ const updateUser = {
     userId: Joi.string().custom(objectId),
     adminId: Joi.string().custom(objectId),
     artistId: Joi.string().custom(objectId),
+    galleryId: Joi.string().custom(objectId),
+    explorerId: Joi.string().custom(objectId),
   }).or('userId', 'adminId', 'artistId', 'galleryId', 'explorerId').required(),
   body: Joi.object()
     .keys({
@@ -55,7 +60,10 @@ const updateUser = {
 const deleteUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
+    adminId: Joi.string().custom(objectId),
     artistId: Joi.string().custom(objectId),
+    galleryId: Joi.string().custom(objectId),
+    explorerId: Joi.string().custom(objectId),
   }).or('userId', 'galleryId', 'artistId', 'adminId', 'explorerId').required(),
 };
 

@@ -12,7 +12,6 @@ const queryExplorers = async (filter, options) => {
 };
 
 const getExplorerById = async (explorerId) => {
-    adminId
     return userService.getUserById(Explorer, explorerId, userType);
 };
 

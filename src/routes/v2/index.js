@@ -28,7 +28,7 @@ const defaultRoutes = [
   },
   {
     path: '/users/explorers',
-    route: galleryRoute,
+    route: explorerRoute,
   },
 ];
 
