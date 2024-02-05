@@ -4,6 +4,7 @@ const artistRoute = require('./users/artist.route');
 const adminRoute = require('./users/admin.route');
 const galleryRoute = require('./users/gallery.route');
 const explorerRoute = require('./users/explorer.route');
+const mediaRoute = require('./media.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 
@@ -29,6 +30,10 @@ const defaultRoutes = [
   {
     path: '/users/explorers',
     route: explorerRoute,
+  },
+  {
+    path: '/media',
+    route: mediaRoute,
   },
 ];
 

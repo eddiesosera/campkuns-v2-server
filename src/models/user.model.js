@@ -3,16 +3,20 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
+const { ref } = require('joi');
 
 const userSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
       trim: true,
+      default: function () {
+        return this.username || 'User';
+      }
     },
     username: {
       type: String,
+      unique: true,
       required: true,
       trim: true,
     },
@@ -54,35 +58,50 @@ const userSchema = mongoose.Schema(
       default: false,
     },
     banner: {
-      type: Buffer,
-      contentType: String
-    },
-    yearsActive: {
-      type: Number,
+      type: String,
+      default: '',
     },
     dateJoined: {
       type: Date,
-      default: Date.now
+      default: Date.now,
+      immutable: true
     },
-    following: {
-      type: String,
-    },
-    following: {
-      type: String,
-    },
-    contactDetails: {
-      type: String,
-    },
-    categories: {
-      type: String,
-    },
-    genres: {
-      type: String,
-    },
+    following: [
+      { type: String, default: '' }
+    ],
+    followers: [
+      { type: String, default: '' }
+    ],
+    contactDetails: [{
+      name: {
+        type: String,
+        default: ''
+      },
+      link: {
+        type: String,
+        default: ''
+      },
+    }],
+    categories: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Genres',
+      default: ''
+    }],
+    genres: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Categories',
+      default: ''
+    }],
     accountCreatedBy: {
-      type: String,
-      default: 'self',
-      enum: ['admin', 'self']
+      type: {
+        type: String,
+        default: 'self',
+        enum: ['admin', 'self']
+      },
+      creatorId: {
+        type: String,
+        default: ''
+      },
     }
   },
   {
@@ -90,7 +109,19 @@ const userSchema = mongoose.Schema(
   },
 );
 
-// add plugin that converts mongoose to json
+// Virtual property for yearsActive
+userSchema.virtual('yearsActive').get(function () {
+  if (this.dateJoined) {
+    const currentDate = new Date();
+    const yearsActive = currentDate.getFullYear() - this.dateJoined.getFullYear();
+
+    return yearsActive;
+  }
+  return 0;
+});
+userSchema.set('toJSON', { virtuals: true });
+
+// converts mongoose to json
 userSchema.plugin(toJSON);
 userSchema.plugin(paginate);
 

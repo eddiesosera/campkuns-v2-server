@@ -1,7 +1,14 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const ApiError = require('./../utils/ApiError');
-const { authService, tokenService, emailService, artistService, adminService } = require('../services');
+const {
+  authService,
+  tokenService,
+  emailService,
+  artistService,
+  galleryService,
+  adminService,
+  explorerService } = require('../services');
 
 const register = catchAsync(async (req, res) => {
   const role = req.body.role;
@@ -15,15 +22,12 @@ const register = catchAsync(async (req, res) => {
     case 'artist':
       userService = artistService;
       break;
-    // case 'gallery':
-    //   userService = galleryService;
-    //   break;
-    // case 'organizer':
-    //   userService = organizerService;
-    //   break;
-    // case 'tourist':
-    //   userService = touristService;
-    //   break;
+    case 'gallery':
+      userService = galleryService;
+      break;
+    case 'explorer':
+      userService = explorerService;
+      break;
     default:
       throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid user role');
   }

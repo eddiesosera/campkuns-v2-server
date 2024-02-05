@@ -4,10 +4,28 @@ const User = require('../user.model'); // Base user model
 
 const artistSchema = mongoose.Schema(
     {
-        bio: {
-            type: String,
-            trim: true,
+        artworks: {
+            uploadType: {
+                type: String,
+                default: 'single',
+                enum: ["single", "multiple"]
+            },
+            ids: [{
+                type: String,
+                default: ''
+            }]
         },
+        exhibitionFeatured: [{
+            type: String,
+            default: ''
+        }],
+        galleryAppearences: [{
+            type: String,
+            default: ''
+        }],
+        upcomingEvents: [{
+            type: String, default: ''
+        }],
     },
     {
         timestamps: true,
