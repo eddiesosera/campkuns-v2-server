@@ -18,30 +18,30 @@ const mediaSchema = mongoose.Schema(
             type: String,
             default: ''
         },
-        // contentType: {
-        //     type: String,
-        //     default: '',
-        //     enum: ["banner", "artwork", "review"],
-        //     // required: true
-        // },
-        // format: {
-        //     type: String,
-        //     default: '',
-        //     enum: ["image/png", "image/jpeg", "image/png", "image/gif",
-        //         "image/webp", "image/mp4", "image/avi", "image/webm", "image/3gp", "image/ogg", "image/mov"],
-        //     required: true
-        // },
-        // dimensions: {
-        //     pixels: {
-        //         type: String,
-        //         default: ''
-        //     },
-        //     aspectRatio: {
-        //         type: String,
-        //         default: '',
-        //         enum: ["1:1", "2:1", "4:3", "14:9", "16:10", "21:9"]
-        //     },
-        // },
+        format: {
+            type: String,
+            default: '',
+            enum: ["image/png", "image/jpeg", "image/png", "image/gif",
+                "image/webp", "image/mp4", "image/avi", "image/webm", "image/3gp", "image/ogg", "image/mov"],
+            required: true
+        },
+        contentType: {
+            type: String,
+            default: '',
+            enum: ["banner", "artwork", "review"],
+            // required: true
+        },
+        dimensions: {
+            pixels: {
+                type: String,
+                default: ''
+            },
+            aspectRatio: {
+                type: String,
+                default: '',
+                enum: ["1:1", "2:1", "4:3", "14:9", "16:10", "21:9"]
+            },
+        },
         uploadedOn: {
             type: Date,
             default: Date.now
