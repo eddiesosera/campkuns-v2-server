@@ -1,4 +1,5 @@
 const { mediaService } = require('../services');
+const pick = require('../utils/pick');
 
 const createMedia = async (req, res) => {
     try {
@@ -45,7 +46,9 @@ const createMedia = async (req, res) => {
 
 const queryMediums = async (req, res) => {
     try {
-        const media = await mediaService.queryMediums();
+        const filter = pick(req.query, ['name', 'role']);
+        const options = pick(req.query, ['sortBy', 'limit', 'page']);
+        const media = await mediaService.queryMediums(filter, options);
         if (!media) {
             res.status(404).json({ message: 'Media not found' });
         } else {
@@ -73,7 +76,9 @@ const getMediaById = async (req, res) => {
 const getMediaByFormat = async (req, res) => {
     try {
         const format = req.params.format;
-        const mediaList = await mediaService.getMediaByFormat(format);
+        const filter = filter = { format: format };
+        const options = pick(req.query, ['sortBy', 'limit', 'page']);
+        const mediaList = await mediaService.getMediaByFormat(filter, options);
         res.status(200).json(mediaList);
     } catch (error) {
         res.status(500).json({ error: error.message });

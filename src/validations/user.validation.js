@@ -12,9 +12,10 @@ const createUser = {
     name: Joi.string().required(),
     username: Joi.string().required(),
     role: Joi.string().required().valid('artist', 'gallery', 'organizer', 'explorer', 'admin'),
-    // ...galleryValidation,
+    ...galleryValidation,
     ...artistValidation,
-    ...adminValidation
+    ...adminValidation,
+    ...explorerValidation
   }),
 };
 
@@ -53,6 +54,10 @@ const updateUser = {
       name: Joi.string(),
       role: Joi.string().valid('artist', 'gallery', 'organizer', 'explorer', 'admin'),
       ...artistValidation,
+      ...galleryValidation,
+      ...artistValidation,
+      ...adminValidation,
+      ...explorerValidation
     })
     .min(1),
 };

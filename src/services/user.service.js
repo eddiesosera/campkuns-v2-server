@@ -104,7 +104,7 @@ const deleteUserById = async (getUserFunction, userId, userType) => {
 
   user.remove();
 
-  return user;
+  return user + `User ${mediaId} successfully removed`;
 };
 
 module.exports = {

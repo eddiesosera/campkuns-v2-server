@@ -12,9 +12,9 @@ const createMedia = async (mediaData) => {
     }
 };
 
-const queryMediums = async () => {
+const queryMediums = async (filter, options) => {
     try {
-        const media = await Media.find();
+        const media = await Media.paginate(filter, options);
         return media;
     } catch (error) {
         return res.status(400).json({ error: 'No files uploaded as: ', error });
@@ -32,9 +32,9 @@ const getMediaById = async (mediaId) => {
     }
 };
 
-const getMediaByFormat = async (format) => {
+const getMediaByFormat = async (filter, options) => {
     try {
-        const mediaList = await Media.find({ format: format });
+        const mediaList = await Media.paginate(filter, options);
         return mediaList;
     } catch (error) {
         throw error;
@@ -44,7 +44,7 @@ const getMediaByFormat = async (format) => {
 const deleteMediaById = async (mediaId) => {
     try {
         const result = await Media.findByIdAndDelete(mediaId);
-        return result;
+        return result + `Media ${mediaId} successfully removed`;
     } catch (error) {
         throw error;
     }
