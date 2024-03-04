@@ -1,10 +1,33 @@
 const allRoles = {
-  artist: ['artists', 'getArtists'],
-  gallery: ['galleries', 'getGalleries'],
-  organizer: [],
-  explorer: ['explorer', 'getExplorers'],
+  artist: [
+    // Self
+    'artists',
+    'getArtists',
+    // Media
+    'getMedia',
+    'manageMedia'
+  ],
+  gallery: [
+    // Self
+    'galleries',
+    'getGalleries',
+    // Media
+    'getMedia',
+    'manageMedia'
+  ],
+  organizer: [
+
+  ],
+  explorer: [
+    // Self
+    'explorer',
+    'getExplorers',
+    // Media
+    'getMedia',
+    'manageMedia'
+  ],
   admin: [
-    // Admins
+    // Self
     'admins',
     'getAdmins',
     'manageAdmins',
