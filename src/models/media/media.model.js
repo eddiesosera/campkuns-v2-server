@@ -38,8 +38,9 @@ const mediaSchema = mongoose.Schema(
         format: {
             type: String,
             default: '',
-            enum: ["image-png", "image/jpeg", "image/png", "image/gif",
-                "image/webp", "image/mp4", "image/avi", "image/webm", "image/3gp", "image/ogg", "image/mov"],
+            enum: ["image/png", "image/jpeg", "image/png", "image/gif",
+                "image/webp", "image/mp4", "image/avi", "image/webm", "image/3gp", "image/ogg",
+                "image/mov"],
             required: true
         },
         contentType: {

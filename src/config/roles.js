@@ -23,6 +23,9 @@ const allRoles = {
     // Base User
     'getUsers',
     'manageUsers',
+    // Media
+    'getMedia',
+    'manageMedia'
   ],
 };
 
